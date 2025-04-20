@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo List</title>
+    <script>
+        async function loadTodos() {
+            const response = await fetch("/api/todos");
+            const todos = await response.json();
+            const list = document.getElementById("todo-list");
+            list.innerHTML = "";
+
+            todos.forEach(todo => {
+                const item = document.createElement("li");
+                item.textContent = `${todo.task} - ${todo.completed ? '✅' : '❌'}`;
+                list.appendChild(item);
+            });
+        }
+
+        window.onload = loadTodos;
+    </script>
+</head>
+<body>
+    <h1>📋 ToDo List</h1>
+    <ul id="todo-list"></ul>
+</body>
+</html>
